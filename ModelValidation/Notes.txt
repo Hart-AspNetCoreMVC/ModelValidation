@@ -1,0 +1,16 @@
+﻿1.start with HomeControllers.
+
+
+SETTING DEFAILE VALIDATION ERRRO MESSAGES -- see startup.cs
++ validations made by model binding process. Usually returns errors that are vague and not very helpful, but can be changed. 
+EX - if a date is not filled in, you will get a "The value '' is invalid" --> can be improved by adding MvcOptions, see startup.cs, see all
+the options available at "ModelBingMessageProvider." object.
+
+DISPLAYING PROPERTY LEVEL VALIDATION MESSAGES -- see MakeBooking.cshtml
++for errors to disply under input fields, use span tage with asp-validation-for attribute
+
+MODEL-LEVEL MESSAGES --see MakeBooking.cshtml
++ set the asp-validation-summary in <div> to ModelOnly, removes all errors from being listed at top of page. Useful when using propery level error messages via <span>
++ but still will show modellevel messages, meaning errors that use a combonation of fiels for validation
+
+SETTING VALIDATION VIA ATTRIBUTES
