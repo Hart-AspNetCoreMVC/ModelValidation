@@ -1,35 +1,30 @@
-﻿@model Appointment
+﻿@model AttributeAppointment
 
 @{
     
     Layout = "_Layout";
 }
 
-@section scripts
-{<script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        //makes sure jquery is ready
-        $(document).ready(function () {
-            //finds the input with class of input-validation-error, finds the closest form group and adds class 'in-valid" which outlines input box red
-            $("input.input-validation-error").addClass("is-invalid");
-        });
-    </script>
+@section scripts{ 
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
 
-<h2>from home controller -- using manual validations in the controllers and jquery to highlight fields</h2>
+<h2>from clientside controller illustrationg jquery client side validation</h2>
 
 <div class="bg-primary m-1 p-1 text-white"> <h2>Book an Appointment</h2></div>
 <hr />
     <div class="col-md-4">
-        <form asp-controller="Home" asp-action="MakeBooking" method="post">
+        <form asp-action="MakeBooking" asp-controller="ClientSide" method="post">
 @*            validation summary tag helper adds error messages detected by action method*@
 @*            "all" shows all errors, "ModelOnly" shows only model level messages (use in conjunction property level span validations, "none" disables the tag helper*@
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ClientName" class="control-label">Your Name:</label>
                 <input asp-for="ClientName" class="form-control"/>
 @*                displays property level errors instead of a top of page*@
-                                
+                                <span asp-validation-for="ClientName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label">Appointment Date:</label>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelValidation.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -10,9 +11,10 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace ModelValidation.Controllers
 {
     public class HomeController : Controller
-    {
+    {   
+        
         public IActionResult Index() => View("MakeBooking", new Appointment {Date = DateTime.Now});
-
+        
         //example of creating manual validation for form fields
         [HttpPost]
         public ViewResult ManualExample(Appointment appt)
@@ -29,7 +31,7 @@ namespace ModelValidation.Controllers
             //checks if a bool was checked
             if (!appt.TermsAccepted)
             {
-                ModelState.AddModelError(nameof(appt.TermsAccepted), "You must accept our policy terms");
+                ModelState.AddModelError(nameof(appt.TermsAccepted), "You must accept our crazy ass policy terms");
             }
             //MODEL LEVEL VALIDATION -- combines several properties. be sure to check that data is entered and valid first, then I check the 
             //more specific features

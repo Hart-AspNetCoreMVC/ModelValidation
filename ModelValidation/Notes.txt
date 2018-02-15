@@ -1,16 +1,31 @@
 ﻿1.start with HomeControllers.
 
 
-SETTING DEFAILE VALIDATION ERRRO MESSAGES -- see startup.cs
+SETTING DEFAULT VALIDATION ERROR MESSAGES -- see startup.cs
 + validations made by model binding process. Usually returns errors that are vague and not very helpful, but can be changed. 
 EX - if a date is not filled in, you will get a "The value '' is invalid" --> can be improved by adding MvcOptions, see startup.cs, see all
 the options available at "ModelBingMessageProvider." object.
 
 DISPLAYING PROPERTY LEVEL VALIDATION MESSAGES -- see MakeBooking.cshtml
-+for errors to disply under input fields, use span tage with asp-validation-for attribute
++for errors to disply under input fields, use span tag with asp-validation-for attribute
 
 MODEL-LEVEL MESSAGES --see MakeBooking.cshtml
-+ set the asp-validation-summary in <div> to ModelOnly, removes all errors from being listed at top of page. Useful when using propery level error messages via <span>
++ set the asp-validation-summary in <div> to ModelOnly, only Model level errors will be included at top of view. Useful when using propery level error messages via <span>
 + but still will show modellevel messages, meaning errors that use a combonation of fiels for validation
 
-SETTING VALIDATION VIA ATTRIBUTES
+SETTING VALIDATION VIA ATTRIBUTES -- see AttributeController, AttributeAppointment Model and Attribute views
++ start with directive System.ComponentModel.DataAnnotation
++ 3 Steps: 1.Attributes are added to model properties or to the class if an attribute is required for all the properties. 2. add conditional if(ModelState.IsValid) in action
+  3. add div asp-validation-summary or span with asp-validation-for="property" to html desired place in html, @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers is required
++ attribute options: [Compare("OtherProperty")], [Range(lo,hi)], [RegularExpression("pattern")], [Required], StringLength(MinimumLength or MaxLength)]
++ all allow custom error message to be added as a parameter; ErrorMessage = "msg"
++ required bools: for single checkbox use [Range(typeof(bool), "true", "true", ErrorMessage="msg")],  for radio button(yes/no) allow null values to property and
+  and check that selection was made; (bool?) and check if null.
+
+
+CREATING CUSTOM PROPERTY VALIDATION ATTRIBUTE
++ create a class that derived from Attribute and implements the IModelValidator interface
+
+CLIENT SIDE VALIDATION --see jqMakingBooking.cshtml
+
+REMOTE VALIDATION
